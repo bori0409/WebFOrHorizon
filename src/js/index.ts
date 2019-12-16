@@ -38,9 +38,14 @@ Cloudsdataprocent = weatherresponse.data.clouds.all;
 console.log(Cloudsdataprocent);
 if(Cloudsdataprocent< 10){
   colorOfTheBody = "#CECECE"
+  var trytochangecolorlookig =  document.getElementById("thebody");
+  //  trytochangecolorlookig.innerHTML = trytochangecolorlookig.innerHTML.replace(default,'<body id="thebody" style="background-color:gray;">)
+  //trytochangecolorlookig.innerHTML = '<body id="thebody" style="background-color:gray;">'
 }
 if(Cloudsdataprocent= 100){
   colorOfTheBody = "##000000"
+  //var trytochangecolorlookig2 =  document.getElementById("thebody");
+  //trytochangecolorlookig2.innerHTML = '<body id="thebody" style="background-color:##000000;"></body>'
 }
     })
 }
@@ -63,12 +68,7 @@ function drawLine(){
       console.log(deg);
       console.log(deg2);
       console.log(kryg);
-      if (document.getElementById("line")==null){
-        var creatingbody = document.createElement('body');
-         creatingbody.innerHTML= ' <body id="thebody" style="background-color:'+colorOfTheBody+';"></body>'
-         var thisbody =  document.getElementById("body");
-         thisbody.appendChild(creatingbody);
-        }
+      
       
      if (document.getElementById("line")==null){
        
@@ -86,7 +86,7 @@ function drawLine(){
       }
       else(document.getElementById("line")!=null){
         var newElement2 = document.getElementById("line");
-       newElement2.innerHTML = '<div id="line2" style="background-color:blue;width 1500px;height:8px;transform:rotate('+deg+'deg);"></div>'
+       newElement2.innerHTML = '<div id="line2" style="background-color:blue;width 1500px;height:8px;transform:rotate('+deg+'deg);">'
        var elementIlookFor =  document.getElementById("thebody");
        elementIlookFor.appendChild(newElement2)
       //document.getElementById("thebody")innerHTML+='<div id="line2" style="background-color:red;width:500px;height:10px;transform:rotate('+deg+'deg);"></div>'
