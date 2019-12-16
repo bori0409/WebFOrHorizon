@@ -22,62 +22,91 @@ interface motion {
 
 }
 
-setInterval(myFunc, 2000)
-setInterval(drawChart, 2000)
-google.charts.load('current', { 'packages': ['corechart'] });
-google.charts.setOnLoadCallback(drawChart);
+//setInterval(myFunc, 2000)
+setInterval(drawLine, 2000)
 
-function myFunc() {
-  axios.get("http://motioninmotions.azurewebsites.net/api/motion")
-    .then(function (res) {
-      var myresults: something[];
-      myresults = res.data;
+var colorOfTheBody: string;
 
-      var p = document.createElement("p");
-      p.innerText = myresults[0].pitch.toString();
-
-      document.getElementById("content").appendChild(p);
-    })
-    .catch(function (err) {
-      console.log(err);
-    });
-}
 // this also works
-
-
-
-function drawChart() {
-  var loadchart = axios.get("http://motioninmotions.azurewebsites.net/api/motion/1")
-    .then(function (response: AxiosResponse) {
-      //var responseData: motion[];
-      var  responseData = response.data;
-
-      console.log(response); // this works, until here
-      console.log(responseData);// this works, until here
-      var datas = new google.visualization.DataTable();  
-      datas.addColumn('number', 'Line');
-
-      responseData.forEach(function (json) {
-        datas.addRow([
-          json[0], json[1]]);
-      });
-      datas.addRow
-
-
-
-
-
-      var options = {
-        title: "test"
-      };
-      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-      chart.draw(datas, options);
-    });
-
+function CheckTheWeather(){
+  axios.get("http://api.openweathermap.org/data/2.5/weather?id=2614481&APPID=cd4a85e753c0e926b1d9d169a381fa61")
+  .then(function (weatherresponse) {
+console.log(" did2");
+console.log(weatherresponse);
+var Cloudsdataprocent;
+Cloudsdataprocent = weatherresponse.data.clouds.all;
+console.log(Cloudsdataprocent);
+if(Cloudsdataprocent< 10){
+  colorOfTheBody = "#CECECE"
 }
-function greeter(person: Person): string {
-  return "Hello, " + person.firstName + " " + person.lastName;
+if(Cloudsdataprocent= 100){
+  colorOfTheBody = "##000000"
 }
+    })
+}
+
+///
+function drawLine(){
+  axios.get("http://motioninmotions.azurewebsites.net/api/motion/1")
+  .then(function (response) {
+
+    console.log("did");
+    var responseData: motion[];
+     responseData = response.data;
+      let deg=responseData[0].pitch;
+      let deg2=responseData[1].pitch;
+      var nula : number;
+      nula = 0;
+      var kryg : number;
+      kryg = 360;
+      var obratno = kryg - deg2;
+      console.log(deg);
+      console.log(deg2);
+      console.log(kryg);
+      if (document.getElementById("line")==null){
+        var creatingbody = document.createElement('body');
+         creatingbody.innerHTML= ' <body id="thebody" style="background-color:'+colorOfTheBody+';"></body>'
+         var thisbody =  document.getElementById("body");
+         thisbody.appendChild(creatingbody);
+        }
+      
+     if (document.getElementById("line")==null){
+       
+        
+       var newElement = document.createElement('div');
+       newElement.innerHTML = '<div id="line" style="background-color:white;width:800px;height:5px;transform:rotate(0 deg);"></div>'
+       var elementIlookFor =  document.getElementById("thebody");
+       elementIlookFor.appendChild(newElement)
+       var neshto = document.createElement("h1")
+       var vremeto;
+       neshto = CheckTheWeather.toString();
+       CheckTheWeather()
+
+     // document.getElementsByTagName("body")[0].innerHTML+='<div id="line" style="background-color:red;width:500px;height:10px;transform:rotate('+deg+'deg);"></div>'
+      }
+      else(document.getElementById("line")!=null){
+        var newElement2 = document.getElementById("line");
+       newElement2.innerHTML = '<div id="line2" style="background-color:blue;width 1500px;height:8px;transform:rotate('+deg+'deg);"></div>'
+       var elementIlookFor =  document.getElementById("thebody");
+       elementIlookFor.appendChild(newElement2)
+      //document.getElementById("thebody")innerHTML+='<div id="line2" style="background-color:red;width:500px;height:10px;transform:rotate('+deg+'deg);"></div>'
+        //document.replaceChild(document.getElementById("line2"),document.getElementById("line"));
+        
+
+           }
+      
+
+  })
+
+
+
+  
+}
+
+
+
+///
+
 
 
 let element: HTMLDivElement = <HTMLDivElement>document.getElementById("content");
