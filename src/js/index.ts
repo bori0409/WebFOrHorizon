@@ -23,7 +23,7 @@ interface motion {
 }
 
 //setInterval(myFunc, 2000)
-setInterval(drawLine, 2000)
+setInterval(drawLine, 500)
 
 var colorOfTheBody: string;
 
@@ -79,7 +79,7 @@ function drawLine(){
        elementIlookFor.appendChild(newElement)
        var neshto = document.createElement("h1")
        var vremeto;
-       neshto = CheckTheWeather.toString();
+       //neshto = CheckTheWeather.toString();
        CheckTheWeather()
 
      // document.getElementsByTagName("body")[0].innerHTML+='<div id="line" style="background-color:red;width:500px;height:10px;transform:rotate('+deg+'deg);"></div>'
